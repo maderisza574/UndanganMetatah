@@ -294,19 +294,21 @@ function InvitationPage() {
             >
               Nama:
             </label>
-            <input
-              type="text"
-              placeholder="Masukkan nama"
-              style={{
-                width: "100%",
-                padding: "10px",
-                marginBottom: "20px",
-                borderRadius: "6px",
-                border: "1px solid #ccc",
-              }}
-              value={namaHadir}
-              onChange={(e) => setNamaHadir(e.target.value)}
-            />
+            <div style={{ paddingRight: 20 }}>
+              <input
+                type="text"
+                placeholder="Masukkan nama"
+                style={{
+                  width: "100%",
+                  padding: "10px",
+                  marginBottom: "20px",
+                  borderRadius: "6px",
+                  border: "1px solid #ccc",
+                }}
+                value={namaHadir}
+                onChange={(e) => setNamaHadir(e.target.value)}
+              />
+            </div>
 
             {/* Kehadiran */}
             <label
@@ -390,22 +392,26 @@ function InvitationPage() {
             style={{ maxWidth: "400px", margin: "0 auto", textAlign: "left" }}
           >
             <label>Nama:</label>
-            <input
-              type="text"
-              value={nama}
-              onChange={(e) => setNama(e.target.value)}
-              placeholder="Masukkan nama"
-              style={{ width: "100%", padding: "10px", marginBottom: "20px" }}
-            />
+            <div style={{ paddingRight: 20, paddingTop: 10 }}>
+              <input
+                type="text"
+                value={nama}
+                onChange={(e) => setNama(e.target.value)}
+                placeholder="Masukkan nama"
+                style={{ width: "100%", padding: "10px", marginBottom: "20px" }}
+              />
+            </div>
 
             <label>Ucapan dan Harapan:</label>
-            <textarea
-              value={pesan}
-              onChange={(e) => setPesan(e.target.value)}
-              placeholder="Tulis ucapan..."
-              rows={4}
-              style={{ width: "100%", padding: "10px", marginBottom: "20px" }}
-            ></textarea>
+            <div style={{ paddingRight: 20, paddingTop: 10 }}>
+              <textarea
+                value={pesan}
+                onChange={(e) => setPesan(e.target.value)}
+                placeholder="Tulis ucapan..."
+                rows={4}
+                style={{ width: "100%", padding: "10px", marginBottom: "20px" }}
+              ></textarea>
+            </div>
 
             <button
               type="submit"
