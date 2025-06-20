@@ -1,5 +1,7 @@
+// Tambahkan pada bagian atas file
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { supabase } from "./supabaseClient";
 
 function InvitationPage() {
@@ -9,6 +11,8 @@ function InvitationPage() {
   const [ucapanList, setUcapanList] = useState([]);
   const [namaHadir, setNamaHadir] = useState("");
   const [status, setStatus] = useState("");
+  const penutupRef = useRef(null);
+  const isPenutupInView = useInView(penutupRef, { once: true });
 
   const RowItem = ({ label, value }) => (
     <div
@@ -48,16 +52,25 @@ function InvitationPage() {
     } else {
       setNama("");
       setPesan("");
-      fetchUcapan(); // refresh daftar ucapan
+      fetchUcapan();
     }
   };
+
+  // Refs dan animasi untuk scroll
+  const reservasiRef = useRef(null);
+  const isReservasiInView = useInView(reservasiRef, {
+    once: true,
+    margin: "-100px",
+  });
+
+  const ucapanRef = useRef(null);
+  const isUcapanInView = useInView(ucapanRef, { once: true, margin: "-100px" });
 
   return (
     <div
       style={{
         minHeight: "100vh",
         background: "linear-gradient(135deg, #EDE8D0, #C9C5B1)",
-        backgroundColor: "#EDE8D0",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -77,14 +90,15 @@ function InvitationPage() {
           boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
         }}
       >
-        {/* PEMBUKAAN */}
-        <img
+        <motion.img
           src="/swastika12.png"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
           alt="Swastika"
-          style={{
-            width: "80px",
-          }}
+          style={{ width: "80px" }}
         />
+
         <div
           style={{
             textAlign: "center",
@@ -92,18 +106,19 @@ function InvitationPage() {
             color: "#222",
           }}
         >
-          {/* Gambar swasty di bawahnya */}
-          <img
+          <motion.img
             src="/swasty.png"
             alt="Om Swastyastu"
-            style={{
-              width: "150px",
-              marginBottom: "10px",
-            }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2 }}
+            style={{ width: "150px", marginBottom: "10px" }}
           />
 
-          {/* Tulisan latin di bawah gambar */}
-          <p
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.4 }}
             style={{
               fontFamily: "'Great Vibes', cursive",
               fontSize: "24px",
@@ -113,7 +128,7 @@ function InvitationPage() {
             }}
           >
             Om Swastyastu
-          </p>
+          </motion.p>
 
           <p
             style={{
@@ -142,10 +157,10 @@ function InvitationPage() {
             style={{
               fontSize: "12px",
               color: "#222",
-              fontWeight: "bold", // Bikin tegas
-              fontFamily: "Georgia, serif", // Gunakan font yang bersih dan kuat
-              letterSpacing: "1px", // (Opsional) Menambah jarak antar huruf biar makin rapi
-              textTransform: "uppercase", // (Opsional) Biar tetap huruf besar semua
+              fontWeight: "bold",
+              fontFamily: "Georgia, serif",
+              letterSpacing: "1px",
+              textTransform: "uppercase",
             }}
           >
             GEDE AGUS KUSUMANINGRAT
@@ -154,10 +169,10 @@ function InvitationPage() {
             style={{
               fontSize: "12px",
               color: "#222",
-              fontWeight: "bold", // Bikin tegas
-              fontFamily: "Georgia, serif", // Gunakan font yang bersih dan kuat
-              letterSpacing: "1px", // (Opsional) Menambah jarak antar huruf biar makin rapi
-              textTransform: "uppercase", // (Opsional) Biar tetap huruf besar semua
+              fontWeight: "bold",
+              fontFamily: "Georgia, serif",
+              letterSpacing: "1px",
+              textTransform: "uppercase",
             }}
           >
             GEDE RIKSEN SURYANINGRAT
@@ -193,16 +208,17 @@ function InvitationPage() {
         </div>
 
         {/* RESEPSI MEPADES */}
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true, amount: 0.3 }}
           style={{
             backgroundColor: "#787569",
             padding: "20px",
             borderRadius: "12px",
             color: "#fff",
             marginTop: "30px",
-            maxWidth: 500,
-            marginLeft: "auto",
-            marginRight: "auto",
           }}
         >
           <h3
@@ -263,9 +279,13 @@ function InvitationPage() {
           >
             Buka di Google Maps
           </a>
-        </div>
+        </motion.div>
         {/* RESERVASI KEHADIRAN */}
-        <div
+        <motion.div
+          ref={reservasiRef}
+          initial={{ opacity: 0, y: 50 }}
+          animate={isReservasiInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
           style={{
             textAlign: "center",
             marginTop: "30px",
@@ -401,9 +421,13 @@ function InvitationPage() {
               Kirim
             </button>
           </form>
-        </div>
+        </motion.div>
         {/* KIRIM UCAPAN */}
-        <div
+        <motion.div
+          ref={ucapanRef}
+          initial={{ opacity: 0, y: 50 }}
+          animate={isUcapanInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
           style={{
             textAlign: "center",
             marginTop: "40px",
@@ -485,36 +509,44 @@ function InvitationPage() {
               </div>
             ))}
           </div>
-        </div>
-        <p
-          style={{
-            fontSize: "15px",
-            marginBottom: "18px",
-            lineHeight: "1.6",
-          }}
+        </motion.div>
+        <motion.div
+          ref={penutupRef}
+          initial={{ opacity: 0, y: 30 }}
+          animate={isPenutupInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.2 }}
         >
-          Atas kehadiran dan doanya, kami sekeluarga mengucapkan banyak
-          terimakasih.
-        </p>
+          <p
+            style={{
+              fontSize: "15px",
+              marginBottom: "18px",
+              lineHeight: "1.6",
+            }}
+          >
+            Atas kehadiran dan doanya, kami sekeluarga mengucapkan banyak
+            terimakasih.
+          </p>
 
-        <img
-          src="/shanthi.png"
-          alt="Om Shanthi"
-          style={{
-            width: "250px",
-          }}
-        />
-        <p
-          style={{
-            fontFamily: "'Great Vibes', cursive",
-            fontSize: "24px",
-            color: "black",
-            marginTop: "10px",
-            marginBottom: "20px",
-          }}
-        >
-          Om Shanti, Shanti, Shanti Om
-        </p>
+          <img
+            src="/shanthi.png"
+            alt="Om Shanthi"
+            style={{
+              width: "250px",
+            }}
+          />
+
+          <p
+            style={{
+              fontFamily: "'Great Vibes', cursive",
+              fontSize: "24px",
+              color: "black",
+              marginTop: "10px",
+              marginBottom: "20px",
+            }}
+          >
+            Om Shanti, Shanti, Shanti Om
+          </p>
+        </motion.div>
       </div>
     </div>
   );
