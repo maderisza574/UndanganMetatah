@@ -130,7 +130,11 @@ function InvitationPage() {
             Om Swastyastu
           </motion.p>
 
-          <p
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
             style={{
               fontSize: "15px",
               marginBottom: "18px",
@@ -140,9 +144,13 @@ function InvitationPage() {
             Atas asung kertha wara nugraha Ida Sang Hyang Widhi Wasa/Tuhan Yang
             Maha Esa, kami mengundang bapak/ibu/saudara/i pada acara mepandes (
             potong gigi) putra/i kami:
-          </p>
+          </motion.p>
 
-          <p
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
             style={{
               fontSize: "12px",
               fontWeight: "bold",
@@ -152,8 +160,13 @@ function InvitationPage() {
             }}
           >
             KADEK WULAN PUSPANINGRAT
-          </p>
-          <p
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
             style={{
               fontSize: "12px",
               color: "#222",
@@ -164,8 +177,13 @@ function InvitationPage() {
             }}
           >
             GEDE AGUS KUSUMANINGRAT
-          </p>
-          <p
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
             style={{
               fontSize: "12px",
               color: "#222",
@@ -176,7 +194,7 @@ function InvitationPage() {
             }}
           >
             GEDE RIKSEN SURYANINGRAT
-          </p>
+          </motion.p>
         </div>
 
         {/* DOA */}
