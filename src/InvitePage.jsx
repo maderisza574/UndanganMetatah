@@ -332,14 +332,14 @@ function InvitationPage() {
 
               const { error } = await supabase
                 .from("kehadiran")
-                .insert([{ nama, status }]);
+                .insert([{ nama: namaHadir, status }]); // <-- FIX di sini
 
               if (error) {
                 alert("Gagal menyimpan kehadiran.");
                 console.error(error);
               } else {
                 alert("Terima kasih atas konfirmasi kehadirannya!");
-                setNama("");
+                setNamaHadir(""); // <-- ini juga harusnya setNamaHadir
                 setStatus("");
               }
             }}
@@ -400,7 +400,8 @@ function InvitationPage() {
                   type="radio"
                   name="kehadiran"
                   value="ya"
-                  onChange={() => setStatus("ya")}
+                  checked={status === "ya"}
+                  onChange={(e) => setStatus(e.target.value)}
                   style={{ marginRight: "10px" }}
                 />
                 Iya, saya akan hadir
@@ -417,6 +418,7 @@ function InvitationPage() {
                   name="kehadiran"
                   value="tidak"
                   checked={status === "tidak"}
+                  onChange={(e) => setStatus(e.target.value)}
                   style={{ marginRight: "10px" }}
                 />
                 Maaf, saya berhalangan hadir
