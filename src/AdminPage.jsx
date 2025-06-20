@@ -42,11 +42,26 @@ export default function AdminPage() {
     setGeneratedLink("");
 
     const cleanPhone = formatPhoneToWa(form.no_hp);
+    const trimmedCode = form.invitation_code.trim();
+    const trimmedName = form.name.trim();
+
+    // Validasi kode sudah ada
+    const { data: existingGuest } = await supabase
+      .from("guests")
+      .select("id")
+      .eq("invitation_code", trimmedCode)
+      .maybeSingle();
+
+    if (existingGuest) {
+      setErrorMsg("Kode undangan sudah digunakan. Harap pilih kode lain.");
+      setLoading(false);
+      return;
+    }
 
     const { error } = await supabase.from("guests").insert([
       {
-        name: form.name.trim(),
-        invitation_code: form.invitation_code.trim(),
+        name: trimmedName,
+        invitation_code: trimmedCode,
         group_name: form.group_name,
         no_hp: cleanPhone,
       },
@@ -58,11 +73,11 @@ export default function AdminPage() {
       setErrorMsg("Gagal menambahkan tamu: " + error.message);
     } else {
       setSuccessMsg("Tamu berhasil ditambahkan!");
-      const url =
-        window.location.origin + `/?to=${form.invitation_code.trim()}`;
+      const encodedCode = encodeURIComponent(trimmedCode);
+      const url = `${window.location.origin}/?to=${encodedCode}`;
       setGeneratedLink(url);
       setFormattedPhone(cleanPhone);
-      setSavedName(form.name.trim());
+      setSavedName(trimmedName);
       setForm({
         name: "",
         invitation_code: "",

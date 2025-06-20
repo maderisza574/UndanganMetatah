@@ -267,17 +267,18 @@ function InvitationPage() {
           {/* Google Maps Embed */}
           <iframe
             title="Lokasi Resepsi"
-            src="https://maps.google.com/maps?q=-8.538973,115.131152&z=17&output=embed"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3945.5900520409555!2d115.1305483667288!3d-8.539118600190447!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd23a5745a1c96b%3A0xfc4575d7b22f9560!2sJl.%20Pahlawan%20No.16%2C%20Delod%20Peken%2C%20Kec.%20Tabanan%2C%20Kabupaten%20Tabanan%2C%20Bali%2082121!5e0!3m2!1sid!2sid!4v1750433611217!5m2!1sid!2sid"
             width="100%"
             height="200"
             style={{
-              border: "0",
+              border: 0,
               borderRadius: "8px",
               margin: "20px 0 10px 0",
             }}
-            allowFullScreen=""
+            allowFullScreen
             loading="lazy"
-          ></iframe>
+            referrerPolicy="no-referrer-when-downgrade"
+          />
 
           {/* Tombol Buka Maps */}
           <a
