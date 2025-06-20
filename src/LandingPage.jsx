@@ -39,69 +39,102 @@ function LandingPage() {
     <div
       style={{
         minHeight: "100vh",
-        backgroundColor: "#EDE8D0",
+        backgroundImage: "url('/background-bali-pattern.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundColor: "#f3f2ed",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
         padding: "20px",
-        fontFamily: "sans-serif",
+        fontFamily: "'Playfair Display', serif",
         textAlign: "center",
+        transition: "all 0.3s ease-in-out",
       }}
     >
+      {/* Load Google Font */}
+      <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap"
+        rel="stylesheet"
+      />
+
       <div
         style={{
-          backgroundColor: "#C9C5B1",
-          borderRadius: "12px",
-          padding: "20px",
-          maxWidth: "500px",
+          backgroundColor: "rgba(255, 255, 255, 0.85)",
+          borderRadius: "16px",
+          padding: "30px",
+          maxWidth: "520px",
           width: "100%",
-          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+          boxShadow: "0 6px 20px rgba(0, 0, 0, 0.2)",
+          backdropFilter: "blur(8px)",
         }}
       >
-        <h1 style={{ fontSize: "22px", marginBottom: "10px", color: "#333" }}>
+        <h1
+          style={{
+            fontSize: "26px",
+            marginBottom: "8px",
+            color: "#5D3A00",
+            fontWeight: "700",
+          }}
+        >
           Undangan Upacara Manusa Yadnya
         </h1>
         <img
-          src="/omlogo.png"
+          src="/swastika12.png"
           alt="Ornamen Bali"
-          style={{ width: "150px", margin: "20px 0" }}
+          style={{ width: "140px", margin: "20px 0" }}
         />
 
-        <h2 style={{ fontSize: "20px", margin: "10px 0", color: "#555" }}>
+        <h2 style={{ fontSize: "22px", margin: "10px 0", color: "#333" }}>
           Potong Gigi / Mepandes
         </h2>
-        <p style={{ fontSize: "16px", color: "#555" }}>Kepada Yth.</p>
-        <h2 style={{ fontSize: "18px", color: "#000" }}>
+        <p style={{ fontSize: "16px", color: "#4A4A4A" }}>Kepada Yth.</p>
+        <h2 style={{ fontSize: "20px", color: "#000", marginTop: "5px" }}>
           {guestName || "Tamu Undangan"}
         </h2>
 
-        <p style={{ fontSize: "16px", marginTop: "10px", color: "#555" }}>
-          Tanpa mengurangi rasa hormat, kami bermaksud mengundang Anda untuk
-          menghadiri acara kami.
+        <p
+          style={{
+            fontSize: "16px",
+            marginTop: "12px",
+            color: "#555",
+            lineHeight: "1.5",
+          }}
+        >
+          Dengan segala hormat, kami mengundang Anda untuk hadir dalam acara
+          sakral kami.
         </p>
 
         <button
           onClick={handleOpenInvitation}
           style={{
-            padding: "12px 24px",
+            padding: "14px 28px",
             fontSize: "16px",
-            backgroundColor: "#787569",
+            background: "linear-gradient(135deg, #b2894b, #6e5e3e)",
             color: "#fff",
             border: "none",
-            borderRadius: "8px",
-            marginTop: "20px",
+            borderRadius: "10px",
+            marginTop: "24px",
             cursor: "pointer",
             width: "100%",
-            maxWidth: "250px",
-            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+            maxWidth: "260px",
+            transition: "0.3s",
+            boxShadow: "0 5px 10px rgba(0, 0, 0, 0.15)",
           }}
         >
           Buka Undangan
         </button>
 
-        <p style={{ marginTop: "30px", fontSize: "14px", color: "#888" }}>
-          Mohon maaf apabila ada kesalahan penulisan nama/gelar
+        <p
+          style={{
+            marginTop: "30px",
+            fontSize: "13px",
+            color: "#777",
+            fontStyle: "italic",
+          }}
+        >
+          Mohon maaf apabila terdapat kesalahan penulisan nama/gelar.
         </p>
       </div>
     </div>

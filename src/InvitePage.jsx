@@ -10,6 +10,21 @@ function InvitationPage() {
   const [namaHadir, setNamaHadir] = useState("");
   const [status, setStatus] = useState("");
 
+  const RowItem = ({ label, value }) => (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        marginBottom: 8,
+        flexWrap: "wrap",
+        gap: 4,
+      }}
+    >
+      <div style={{ minWidth: 100 }}>{label}</div>
+      <div style={{ flex: 1 }}>: {value}</div>
+    </div>
+  );
+
   const fetchUcapan = async () => {
     const { data, error } = await supabase
       .from("ucapan")
@@ -41,6 +56,7 @@ function InvitationPage() {
     <div
       style={{
         minHeight: "100vh",
+        background: "linear-gradient(135deg, #EDE8D0, #C9C5B1)",
         backgroundColor: "#EDE8D0",
         display: "flex",
         flexDirection: "column",
@@ -61,41 +77,92 @@ function InvitationPage() {
           boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
         }}
       >
-        <h1
+        {/* PEMBUKAAN */}
+        <img
+          src="/swastika12.png"
+          alt="Swastika"
           style={{
-            fontFamily: "'Great Vibes', cursive",
-            fontSize: "32px",
-            marginBottom: "10px",
-            color: "#333",
+            width: "80px",
           }}
-        >
-          Mepandes
-        </h1>
-
-        <p
+        />
+        <div
           style={{
-            fontSize: "16px",
+            textAlign: "center",
+            fontFamily: "Georgia, serif",
             color: "#222",
-            fontWeight: "bold", // Bikin tegas
-            fontFamily: "Georgia, serif", // Gunakan font yang bersih dan kuat
-            letterSpacing: "1px", // (Opsional) Menambah jarak antar huruf biar makin rapi
-            textTransform: "uppercase", // (Opsional) Biar tetap huruf besar semua
           }}
         >
-          KADEK WULAN PUSPANINGRAT
-        </p>
+          {/* Gambar swasty di bawahnya */}
+          <img
+            src="/swasty.png"
+            alt="Om Swastyastu"
+            style={{
+              width: "150px",
+              marginBottom: "10px",
+            }}
+          />
 
-        <p
-          style={{
-            marginTop: "20px",
-            fontSize: "14px",
-            fontWeight: "bold",
-            color: "#787569",
-            fontFamily: "Arial, sans-serif",
-          }}
-        >
-          Rabu, 02 Juli 2025
-        </p>
+          {/* Tulisan latin di bawah gambar */}
+          <p
+            style={{
+              fontFamily: "'Great Vibes', cursive",
+              fontSize: "24px",
+              color: "black",
+              marginTop: "0",
+              marginBottom: "20px",
+            }}
+          >
+            Om Swastyastu
+          </p>
+
+          <p
+            style={{
+              fontSize: "15px",
+              marginBottom: "18px",
+              lineHeight: "1.6",
+            }}
+          >
+            Atas asung kertha wara nugraha Ida Sang Hyang Widhi Wasa/Tuhan Yang
+            Maha Esa, kami mengundang bapak/ibu/saudara/i pada acara mepandes (
+            potong gigi) putra/i kami:
+          </p>
+
+          <p
+            style={{
+              fontSize: "12px",
+              fontWeight: "bold",
+              letterSpacing: "1px",
+              textTransform: "uppercase",
+              margin: "12px 0",
+            }}
+          >
+            KADEK WULAN PUSPANINGRAT
+          </p>
+          <p
+            style={{
+              fontSize: "12px",
+              color: "#222",
+              fontWeight: "bold", // Bikin tegas
+              fontFamily: "Georgia, serif", // Gunakan font yang bersih dan kuat
+              letterSpacing: "1px", // (Opsional) Menambah jarak antar huruf biar makin rapi
+              textTransform: "uppercase", // (Opsional) Biar tetap huruf besar semua
+            }}
+          >
+            GEDE AGUS KUSUMANINGRAT
+          </p>
+          <p
+            style={{
+              fontSize: "12px",
+              color: "#222",
+              fontWeight: "bold", // Bikin tegas
+              fontFamily: "Georgia, serif", // Gunakan font yang bersih dan kuat
+              letterSpacing: "1px", // (Opsional) Menambah jarak antar huruf biar makin rapi
+              textTransform: "uppercase", // (Opsional) Biar tetap huruf besar semua
+            }}
+          >
+            GEDE RIKSEN SURYANINGRAT
+          </p>
+        </div>
 
         {/* DOA */}
         <div
@@ -106,7 +173,7 @@ function InvitationPage() {
             backgroundPosition: "center",
             padding: "30px 20px",
             borderRadius: "12px",
-            marginTop: "20px",
+            marginTop: "30px",
             textAlign: "center",
             fontFamily: "'Georgia', serif", // gaya kitab klasik
             color: "#3b2f2f", // warna coklat tua klasik
@@ -124,64 +191,7 @@ function InvitationPage() {
             (Yajurveda XV.113)
           </p>
         </div>
-        {/* PEMBUKAAN */}
-        <div
-          style={{
-            textAlign: "center",
-            fontFamily: "Georgia, serif",
-            color: "#222",
-          }}
-        >
-          <p
-            style={{
-              fontSize: "16px",
-              fontWeight: "bold",
-              letterSpacing: "1px",
-              textTransform: "uppercase",
-              marginBottom: "10px",
-            }}
-          >
-            OM SWASTYASTU
-          </p>
 
-          <p
-            style={{
-              fontSize: "15px",
-              marginBottom: "10px",
-              lineHeight: "1.6",
-            }}
-          >
-            Atas Asung Kertha Wara Nugraha Ida Sang Hyang Widhi Wasa / Tuhan
-            Yang Maha Esa, kami bermaksud untuk mengundang Bapak/Ibu/Saudara/i
-            untuk hadir pada acara Mepandes / Potong Gigi putri kami:
-          </p>
-
-          <p
-            style={{
-              fontSize: "16px",
-              fontWeight: "bold",
-              letterSpacing: "1px",
-              textTransform: "uppercase",
-              margin: "12px 0",
-            }}
-          >
-            KADEK WULAN PUSPANINGRAT
-          </p>
-
-          <p
-            style={{
-              fontSize: "13px",
-              fontStyle: "italic",
-              color: "#444",
-              lineHeight: "1.6",
-            }}
-          >
-            Anak kedua dari pasangan:
-            <br />
-            Bapak I Wayan Gede Dharma Satywan
-            <br />& Ibu Ni Putu Hemi Kusumayati, S.H.
-          </p>
-        </div>
         {/* RESEPSI MEPADES */}
         <div
           style={{
@@ -189,6 +199,10 @@ function InvitationPage() {
             padding: "20px",
             borderRadius: "12px",
             color: "#fff",
+            marginTop: "30px",
+            maxWidth: 500,
+            marginLeft: "auto",
+            marginRight: "auto",
           }}
         >
           <h3
@@ -196,24 +210,37 @@ function InvitationPage() {
               fontFamily: "'Great Vibes', cursive",
               fontSize: "28px",
               marginBottom: "10px",
+              textAlign: "center",
             }}
           >
             Resepsi Mepandes
           </h3>
-          <p style={{ fontSize: "14px" }}>
-            Merupakan suatu kehormatan dan kebahagiaan bagi kami sekeluarga,
-            apabila Bapak/Ibu/Saudara berkenan hadir dan memberikan doa restu
-            kepada putri kami pada:
-          </p>
-          <p style={{ margin: "10px 0", fontSize: "14px" }}>📍 Lokasi: Rumah</p>
 
-          {/* Maps Embed */}
+          <div style={{ fontSize: 14, textAlign: "center" }}>
+            <p style={{ margin: "10px 0" }}>
+              Merupakan suatu kehormatan bagi kami sekeluarga apabila bapak/ibu/
+              saudara/i berkenan hadir pada acara kami yang akan diselenggarakan
+              pada:
+            </p>
+
+            <div style={{ maxWidth: 300, margin: "0 auto", textAlign: "left" }}>
+              <RowItem label="Hari/Tanggal" value="Rabu, 2 Juli 2025" />
+              <RowItem label="Jam" value="12.00 WITA - selesai" />
+              <RowItem label="Alamat" value="Jln Pahlawan No 16, Tabanan" />
+            </div>
+          </div>
+
+          {/* Google Maps Embed */}
           <iframe
             title="Lokasi Resepsi"
             src="https://maps.google.com/maps?q=-8.538973,115.131152&z=17&output=embed"
             width="100%"
             height="200"
-            style={{ border: "0", borderRadius: "8px", margin: "10px 0" }}
+            style={{
+              border: "0",
+              borderRadius: "8px",
+              margin: "20px 0 10px 0",
+            }}
             allowFullScreen=""
             loading="lazy"
           ></iframe>
@@ -459,6 +486,35 @@ function InvitationPage() {
             ))}
           </div>
         </div>
+        <p
+          style={{
+            fontSize: "15px",
+            marginBottom: "18px",
+            lineHeight: "1.6",
+          }}
+        >
+          Atas kehadiran dan doanya, kami sekeluarga mengucapkan banyak
+          terimakasih.
+        </p>
+
+        <img
+          src="/shanthi.png"
+          alt="Om Shanthi"
+          style={{
+            width: "250px",
+          }}
+        />
+        <p
+          style={{
+            fontFamily: "'Great Vibes', cursive",
+            fontSize: "24px",
+            color: "black",
+            marginTop: "10px",
+            marginBottom: "20px",
+          }}
+        >
+          Om Shanti, Shanti, Shanti Om
+        </p>
       </div>
     </div>
   );

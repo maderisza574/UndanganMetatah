@@ -6,12 +6,15 @@ export default function AdminPage() {
     name: "",
     invitation_code: "",
     group_name: "",
+    no_hp: "",
   });
 
   const [loading, setLoading] = useState(false);
   const [successMsg, setSuccessMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [generatedLink, setGeneratedLink] = useState("");
+  const [formattedPhone, setFormattedPhone] = useState("");
+  const [savedName, setSavedName] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,6 +24,16 @@ export default function AdminPage() {
     }));
   };
 
+  const formatPhoneToWa = (input) => {
+    let phone = input.trim();
+    if (phone.startsWith("0")) {
+      phone = "+62" + phone.slice(1);
+    } else if (!phone.startsWith("+")) {
+      phone = "+62" + phone;
+    }
+    return phone.replace(/\D/g, ""); // keep only digits
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -28,11 +41,14 @@ export default function AdminPage() {
     setErrorMsg("");
     setGeneratedLink("");
 
+    const cleanPhone = formatPhoneToWa(form.no_hp);
+
     const { error } = await supabase.from("guests").insert([
       {
         name: form.name.trim(),
         invitation_code: form.invitation_code.trim(),
         group_name: form.group_name,
+        no_hp: cleanPhone,
       },
     ]);
 
@@ -45,10 +61,13 @@ export default function AdminPage() {
       const url =
         window.location.origin + `/?to=${form.invitation_code.trim()}`;
       setGeneratedLink(url);
+      setFormattedPhone(cleanPhone);
+      setSavedName(form.name.trim());
       setForm({
         name: "",
         invitation_code: "",
         group_name: "",
+        no_hp: "",
       });
     }
   };
@@ -86,6 +105,19 @@ export default function AdminPage() {
             onChange={handleChange}
             required
             style={{ width: "100%", padding: "8px" }}
+          />
+        </div>
+
+        <div style={{ marginBottom: "12px" }}>
+          <label>No. HP:</label>
+          <input
+            type="text"
+            name="no_hp"
+            value={form.no_hp}
+            onChange={handleChange}
+            required
+            style={{ width: "100%", padding: "8px" }}
+            placeholder="contoh: 081234567890"
           />
         </div>
 
@@ -132,30 +164,65 @@ export default function AdminPage() {
           style={{
             marginTop: "20px",
             background: "#f1f1f1",
-            padding: "10px",
+            padding: "12px",
             borderRadius: "8px",
           }}
         >
           <p>
-            Link Undangan:{" "}
+            <strong>Kepada Yth. Saudara:</strong> {savedName}
+          </p>
+          <p>
+            <strong>Link Undangan:</strong>{" "}
             <a href={generatedLink} target="_blank" rel="noopener noreferrer">
-              {generatedLink}
+              Klik di sini untuk melihat undangan
             </a>
           </p>
-          <button
-            onClick={handleCopyLink}
-            style={{
-              marginTop: "8px",
-              padding: "8px 16px",
-              backgroundColor: "#666",
-              color: "#fff",
-              border: "none",
-              borderRadius: "6px",
-              cursor: "pointer",
-            }}
-          >
-            Salin Link
-          </button>
+
+          <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
+            <button
+              onClick={handleCopyLink}
+              style={{
+                padding: "8px 16px",
+                backgroundColor: "#666",
+                color: "#fff",
+                border: "none",
+                borderRadius: "6px",
+                cursor: "pointer",
+              }}
+            >
+              Salin Link
+            </button>
+
+            <a
+              href={`https://wa.me/${formattedPhone}?text=${encodeURIComponent(
+                `Kepada Yth.\nBapak/Ibu/Saudara/i ${savedName}\n\n` +
+                  `Om Swastyastu,\n\n` +
+                  `Atas asung kertha wara nugraha Ida Sang Hyang Widhi Wasa/Tuhan Yang Maha Esa, kami mengundang bapak/ibu/saudara/i pada acara mepandes (potong gigi) putra/i kami:\n\n` +
+                  `- Gede Agus Kusumaningrat\n` +
+                  `- Kadek Wulan Puspaningrat\n` +
+                  `- Gede Riksen Suryaningrat\n\n` +
+                  `Merupakan suatu kehormatan bagi kami sekeluarga apabila bapak/ibu/saudara/i berkenan hadir pada acara kami yang akan diselenggarakan pada:\n\n` +
+                  `Hari/Tanggal : Rabu, 2 Juli 2025\n` +
+                  `Jam          : 12.00 WITA - selesai\n` +
+                  `Alamat       : Jln Pahlawan No 16, Tabanan\n\n` +
+                  `Berikut link undangannya:\n${generatedLink}\n\n` +
+                  `Atas kehadiran dan doanya, kami sekeluarga mengucapkan banyak terima kasih.\n\n` +
+                  `Om Santi Santi Santi Om`
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                padding: "8px 16px",
+                backgroundColor: "#25D366",
+                color: "#fff",
+                borderRadius: "6px",
+                textDecoration: "none",
+                display: "inline-block",
+              }}
+            >
+              Kirim via WhatsApp
+            </a>
+          </div>
         </div>
       )}
     </div>
