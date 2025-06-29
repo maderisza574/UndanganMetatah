@@ -280,9 +280,9 @@ function InvitationPage() {
             referrerPolicy="no-referrer-when-downgrade"
           />
 
-          {/* Tombol Buka Maps */}
+          {/* Tombol Buka Maps - URL disamakan dengan iframe location */}
           <a
-            href="https://www.google.com/maps/search/?api=1&query=-8.538973,115.131152"
+            href="https://www.google.com/maps/place/Jl.+Pahlawan+No.16,+Delod+Peken,+Kec.+Tabanan,+Kabupaten+Tabanan,+Bali+82121"
             target="_blank"
             rel="noopener noreferrer"
             style={{
